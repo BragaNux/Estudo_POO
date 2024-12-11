@@ -1,0 +1,68 @@
+/**
+
+Questão 6: Sistema de Notificações
+Uma empresa deseja criar um sistema para enviar notificações por diferentes canais, 
+como E-mail, SMS e Push Notification. Cada canal deve ter sua própria implementação 
+e o sistema deve ser projetado para que a adição de novos canais de notificação seja 
+simples e não exija alterações no código existente.
+
+***/
+interface EnviarNotif{
+    public void remetente();
+    public void mensagem();
+}
+
+class Email implements EnviarNotif{
+    public void remetente(){
+        System.out.println("Mãe.");
+    }
+    public void mensagem(){
+        System.out.println("Compre leite!");
+    }
+}
+
+class SMS implements EnviarNotif{
+    public void remetente(){
+        System.out.println("Júnior RH.");
+    }
+    public void mensagem(){
+        System.out.println("Reunião às 11h.");
+    }
+}
+
+class PushNotif implements EnviarNotif{
+    public void remetente(){
+        System.out.println("Larissa ex.");
+    }
+    public void mensagem(){
+        System.out.println("Suas coisas estão aqui");
+    }
+}
+
+class Notificados{
+    EnviarNotif enviado;
+
+    public Notificados(EnviarNotif enviado){
+        this.enviado = enviado;
+    }
+
+    public void grude(){
+        enviado.mensagem();
+        enviado.remetente();
+    }
+}
+
+public class Main{
+    public static void main (String[] args){
+        Notificados email = new Notificados(new Email());
+        Notificados sms = new Notificados(new SMS());
+        Notificados push = new Notificados(new PushNotif());
+
+        email.grude();
+
+        push.grude();
+
+        sms.grude();
+
+    }
+}
